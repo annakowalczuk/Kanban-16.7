@@ -52,6 +52,7 @@ Column.prototype = {
 	createCard: function (card) {
 		this.element.children('ul').append(card.element);
 	},
+
 	deleteColumn: function () {
 		var self = this;
 		$.ajax({
@@ -72,8 +73,7 @@ Column.prototype = {
 				name: newColumnName
 			},
 			success: function (response) {
-				var newColumnTitle = self.element.find('.column-title');
-				newColumnTitle.text(newColumnName);
+				self.element.find('.column-title').text(newColumnName);
 			}
 		});
 	}
