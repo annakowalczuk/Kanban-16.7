@@ -18,6 +18,10 @@ function Column(id, name) {
 			self.deleteColumn();
 		});
 
+		columnTitle.click(function () {
+			self.changeColumnName();
+		});
+
 		columnAddCard.click(function (event) {
 			var cardName = prompt("Enter the name of the card");
 			event.preventDefault();
@@ -55,6 +59,21 @@ Column.prototype = {
 			method: 'DELETE',
 			success: function (response) {
 				self.element.remove();
+			}
+		});
+	},
+	changeColumnName: function () {
+		var newColumnName = prompt('Enter a new column name');
+		var self = this;
+		$.ajax({
+			url: baseUrl + '/column/' + self.id,
+			method: 'PUT',
+			data: {
+				name: newColumnName
+			},
+			success: function (response) {
+				var newColumnTitle = self.element.find('.column-title');
+				newColumnTitle.text(newColumnName);
 			}
 		});
 	}
