@@ -7,7 +7,7 @@ function Card(id, name) {
 	this.element = createCard();
 
 	function createCard() {
-		var card = $('<li class="card"></li>');
+		var card = $('<li data-id="' + self.id + '" class="card"></li>');
 		var cardDeleteBtn = $('<button class="btn-delete">x</button>');
 		var cardDescription = $('<p class="card-description"></p>');
 
@@ -52,5 +52,10 @@ Card.prototype = {
 		// 		self.element.find('.card-description').text(newCardName);
 		// 	}
 		// });
+	},
+
+	changeCardPosition(newId) {
+		console.log(this);
+		console.log(newId);
 	}
 };
