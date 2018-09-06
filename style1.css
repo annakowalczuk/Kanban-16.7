@@ -429,4 +429,8 @@ body {
   overflow-wrap: break-word;
 }
 
+.card-placeholder {
+  min-height: 50px;
+}
+
 /*# sourceMappingURL=style1.css.map */

@@ -19,10 +19,17 @@ function Card(id, name) {
 			self.changeCardName();
 		});
 
+		console.log(card);
+		card[0].addEventListener('eventChangeCardPosition', function(e){
+			console.log(e);
+			self.changeCardPosition(e.detail);
+		});
+		
 		card.append(cardDeleteBtn);
 		cardDescription.text(self.name);
 		card.append(cardDescription)
 		return card;
+		
 	}
 }
 
@@ -41,21 +48,32 @@ Card.prototype = {
 	changeCardName: function () {
 		var newCardName = prompt('Enter a new card name');
 		var self = this;
-		// $.ajax({
-		// 	url: baseUrl + '/card/' + self.id,
-		// 	method: 'PUT',
-		// 	data: {
-		// 		name: newCardName,
-		// 		bootcamp_kanban_column_id: column.id //skąd wziąć id kolumny?
-		// 	},
-		// 	success: function (response) {
-		// 		self.element.find('.card-description').text(newCardName);
-		// 	}
-		// });
+		if (newCardName) {
+			var columnId = $(this.element).parent().data('id');
+			$.ajax({
+				url: baseUrl + '/card/' + self.id,
+				method: 'PUT',
+				data: {
+					name: newCardName,
+					bootcamp_kanban_column_id: columnId
+				},
+				success: function (response) {
+					self.element.find('.card-description').text(newCardName);
+				}
+			});
+		}
 	},
 
 	changeCardPosition(newId) {
-		console.log(this);
 		console.log(newId);
+		var self = this;
+		$.ajax({
+			url: baseUrl + '/card/' + self.id,
+			method: 'PUT',
+			data: {
+				name: this.name,
+				bootcamp_kanban_column_id: newId
+			}
+		});
 	}
 };

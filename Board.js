@@ -29,11 +29,11 @@ function initSortable() {
 			placeholder: 'card-placeholder',
 			receive: function( event, ui ) {
 				var columnId = $(event.target).data('id');
-				var uiTemp = $(ui.item)[0];
+				var card = $(ui.item)[0];
 
-				var card = new Card($(uiTemp).data('id'), $(uiTemp).find('.card-description').text());
-				card.changeCardPosition(columnId);
-
+				// var card = new Card($(uiTemp).data('id'), $(uiTemp).find('.card-description').text());
+				// card.changeCardPosition(columnId);
+				card.dispatchEvent(new CustomEvent('eventChangeCardPosition', {detail: columnId}));
 			}
     }).disableSelection();
   }
